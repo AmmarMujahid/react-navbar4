@@ -1,5 +1,3 @@
-import React from 'react'
-
 const NAV_ITEMS = [
   {
     label: "Home",
@@ -17,24 +15,25 @@ const NAV_ITEMS = [
     label: "Contact",
     key: "contact",
   },
-]
+];
 
-export default function NavItems() {
+export default function NavItems({ activePage, setActivePage }) {
   return (
     <>
-        <div className='flex justify-end gap-8 mr-8 font-medium text-[#FCFAF9]'>
-          {
-            NAV_ITEMS.map((item) => (
-              <a href="#" className='hover:underline'>{item.label}</a>
-            ))
-          }
-            {/* <ul className='flex justify-end gap-8 mr-8 font-medium text-[#FCFAF9]'>
-                <li><a href="#" className='hover:underline'>Home</a></li>
-                <li><a href="#" className='hover:underline'>Blog</a></li>
-                <li><a href="#" className='hover:underline'>About</a></li>
-                <li><a href="#" className='hover:underline'>Contact</a></li>
-            </ul> */}
-        </div>
+      <div className="flex justify-end gap-8 mr-8 font-medium text-[#FCFAF9] ">
+        {NAV_ITEMS.map((item) => (
+          <a
+            key={item.key}
+            className={`cursor-pointer hover:underline ${activePage === item.key ? "text-red-500": ""}`}
+            onClick={(e) => {
+              e.preventDefault();
+              setActivePage(item.key);
+            }}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
     </>
-  )
+  );
 }
